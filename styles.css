@@ -1489,32 +1489,32 @@ html {
 }
 
 .hero-slide:nth-child(1) {
-    background-image: url('../../../Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-10.jpg');
+    background-image: url('img/PHOTO-2025-06-24-16-44-10.jpg');
     animation-delay: 0s;
 }
 
 .hero-slide:nth-child(2) {
-    background-image: url('../../../Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-15[2].jpg');
+    background-image: url('img/PHOTO-2025-06-24-16-44-15[2].jpg');
     animation-delay: 5s;
 }
 
 .hero-slide:nth-child(3) {
-    background-image: url('../../../Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-11.jpg');
+    background-image: url('img/PHOTO-2025-06-24-21-16-11.jpg');
     animation-delay: 10s;
 }
 
 .hero-slide:nth-child(4) {
-    background-image: url('../../../Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-26.jpg');
+    background-image: url('img/PHOTO-2025-06-24-21-16-26.jpg');
     animation-delay: 15s;
 }
 
 .hero-slide:nth-child(5) {
-    background-image: url('../../../Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-27[1].jpg');
+    background-image: url('img/PHOTO-2025-06-24-21-16-27[1].jpg');
     animation-delay: 20s;
 }
 
 .hero-slide:nth-child(6) {
-    background-image: url('../../../Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-28.jpg');
+    background-image: url('img/PHOTO-2025-06-24-21-16-28.jpg');
     animation-delay: 25s;
 }
 

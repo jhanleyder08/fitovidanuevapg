@@ -5,7 +5,7 @@ const products = [
         name: "Colágeno Hidrolizado",
         category: "suplementos",
         price: 35.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-41-57.jpg",
+        image: "img/PHOTO-2025-06-24-16-41-57.jpg",
         description: "Colágeno hidrolizado para la salud de piel, cabello, uñas y articulaciones. Fórmula de alta absorción."
     },
     {
@@ -13,7 +13,7 @@ const products = [
         name: "Vitamina C 1000mg",
         category: "vitaminas",
         price: 18.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-41-57[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-41-57[1].jpg",
         description: "Vitamina C de alta potencia para fortalecer el sistema inmunológico. 60 cápsulas."
     },
     {
@@ -21,7 +21,7 @@ const products = [
         name: "Omega 3 Premium",
         category: "suplementos",
         price: 29.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-41-57[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-41-57[2].jpg",
         description: "Ácidos grasos esenciales Omega 3 de aceite de pescado. Beneficia la salud cardiovascular."
     },
     {
@@ -29,7 +29,7 @@ const products = [
         name: "Multivitamínico Completo",
         category: "vitaminas",
         price: 24.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-04.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-04.jpg",
         description: "Fórmula completa de vitaminas y minerales esenciales para el bienestar diario."
     },
     {
@@ -37,7 +37,7 @@ const products = [
         name: "Magnesio Complex",
         category: "suplementos",
         price: 22.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-04[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-04[1].jpg",
         description: "Complejo de magnesio para músculos, nervios y energía. Mejora el sueño y reduce calambres."
     },
     {
@@ -45,7 +45,7 @@ const products = [
         name: "Ashwagandha Orgánica",
         category: "hierbas",
         price: 26.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-05.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-05.jpg",
         description: "Hierba adaptógena ayurvédica para reducir el estrés y mejorar la vitalidad."
     },
     {
@@ -53,7 +53,7 @@ const products = [
         name: "Probióticos Digestivos",
         category: "suplementos",
         price: 32.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-05[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-05[1].jpg",
         description: "50 mil millones de UFC. Mejora la salud digestiva y fortalece el sistema inmune."
     },
     {
@@ -61,7 +61,7 @@ const products = [
         name: "Cúrcuma con Pimienta Negra",
         category: "hierbas",
         price: 19.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-05[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-05[2].jpg",
         description: "Poderoso antiinflamatorio natural con curcumina de alta biodisponibilidad."
     },
     {
@@ -69,7 +69,7 @@ const products = [
         name: "Zinc 50mg",
         category: "vitaminas",
         price: 15.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-07.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-07.jpg",
         description: "Zinc quelado para mejor absorción. Apoya el sistema inmune y la salud de la piel."
     },
     {
@@ -77,7 +77,7 @@ const products = [
         name: "Vitamina D3 5000 UI",
         category: "vitaminas",
         price: 16.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-09.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-09.jpg",
         description: "Vitamina del sol. Esencial para huesos fuertes y sistema inmune saludable."
     },
     {
@@ -85,7 +85,7 @@ const products = [
         name: "Biotina para Cabello",
         category: "vitaminas",
         price: 21.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-09[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-09[1].jpg",
         description: "10,000 mcg de biotina. Promueve el crecimiento del cabello, piel y uñas saludables."
     },
     {
@@ -93,7 +93,7 @@ const products = [
         name: "Espirulina Orgánica",
         category: "suplementos",
         price: 28.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-10.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-10.jpg",
         description: "Superalimento rico en proteínas, vitaminas y minerales. 100% orgánica."
     },
     {
@@ -101,7 +101,7 @@ const products = [
         name: "Aceite de Coco Orgánico",
         category: "aceites",
         price: 18.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-10[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-10[1].jpg",
         description: "Aceite de coco virgen extra orgánico. Para cocinar, piel y cabello. 500ml."
     },
     {
@@ -109,7 +109,7 @@ const products = [
         name: "Melatonina 10mg",
         category: "suplementos",
         price: 17.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-10[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-10[2].jpg",
         description: "Ayuda natural para dormir. Regula el ciclo del sueño de forma natural."
     },
     {
@@ -117,7 +117,7 @@ const products = [
         name: "Maca Andina en Polvo",
         category: "hierbas",
         price: 23.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-10[3].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-10[3].jpg",
         description: "Superalimento peruano. Aumenta energía, resistencia y equilibrio hormonal."
     },
     {
@@ -125,7 +125,7 @@ const products = [
         name: "CoQ10 200mg",
         category: "suplementos",
         price: 39.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-10[4].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-10[4].jpg",
         description: "Coenzima Q10 para energía celular y salud cardiovascular."
     },
     {
@@ -133,7 +133,7 @@ const products = [
         name: "Té Verde Extracto",
         category: "hierbas",
         price: 20.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-11.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-11.jpg",
         description: "Extracto concentrado de té verde. Antioxidante natural y apoyo metabólico."
     },
     {
@@ -141,7 +141,7 @@ const products = [
         name: "Calcio + Vitamina D",
         category: "vitaminas",
         price: 19.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-11[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-11[1].jpg",
         description: "Fórmula combinada para huesos y dientes fuertes. Previene osteoporosis."
     },
     {
@@ -149,7 +149,7 @@ const products = [
         name: "Ajo Negro Premium",
         category: "hierbas",
         price: 27.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-11[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-11[2].jpg",
         description: "Ajo negro fermentado. Poderoso antioxidante para la salud cardiovascular."
     },
     {
@@ -157,7 +157,7 @@ const products = [
         name: "Hierro Quelado",
         category: "vitaminas",
         price: 16.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-12.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-12.jpg",
         description: "Hierro de fácil absorción. Combate la anemia y aumenta la energía."
     },
     {
@@ -165,7 +165,7 @@ const products = [
         name: "Proteína Vegana",
         category: "proteinas",
         price: 44.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-12[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-12[1].jpg",
         description: "Proteína vegetal de guisantes y arroz. Sin lactosa, sabor chocolate. 1kg."
     },
     {
@@ -173,7 +173,7 @@ const products = [
         name: "BCAA 2:1:1",
         category: "proteinas",
         price: 34.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-12[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-12[2].jpg",
         description: "Aminoácidos ramificados. Recuperación muscular y rendimiento deportivo."
     },
     {
@@ -181,7 +181,7 @@ const products = [
         name: "Aceite de Oliva Extra Virgen",
         category: "aceites",
         price: 25.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-12[3].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-12[3].jpg",
         description: "Aceite de oliva prensado en frío. Alto en antioxidantes. 750ml."
     },
     {
@@ -189,7 +189,7 @@ const products = [
         name: "L-Carnitina Líquida",
         category: "suplementos",
         price: 29.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-13.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-13.jpg",
         description: "Quemador de grasa natural. Convierte grasa en energía. 500ml."
     },
     {
@@ -197,7 +197,7 @@ const products = [
         name: "Moringa en Polvo",
         category: "hierbas",
         price: 21.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-14.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-14.jpg",
         description: "Superalimento rico en nutrientes. 90 nutrientes en una sola planta."
     },
     {
@@ -205,7 +205,7 @@ const products = [
         name: "Glucosamina + Condroitina",
         category: "suplementos",
         price: 36.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-15.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-15.jpg",
         description: "Para la salud articular. Reduce dolor y mejora movilidad."
     },
     {
@@ -213,7 +213,7 @@ const products = [
         name: "Jengibre en Cápsulas",
         category: "hierbas",
         price: 17.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-15[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-15[1].jpg",
         description: "Antiinflamatorio natural. Mejora digestión y alivia náuseas."
     },
     {
@@ -221,7 +221,7 @@ const products = [
         name: "Vitamina B Complex",
         category: "vitaminas",
         price: 19.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-15[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-15[2].jpg",
         description: "Todas las vitaminas B en una cápsula. Energía y sistema nervioso."
     },
     {
@@ -229,7 +229,7 @@ const products = [
         name: "Aceite de Linaza",
         category: "aceites",
         price: 22.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-15[3].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-15[3].jpg",
         description: "Rico en Omega 3 vegetal. Salud cardiovascular y digestiva."
     },
     {
@@ -237,7 +237,7 @@ const products = [
         name: "Chlorella Orgánica",
         category: "suplementos",
         price: 31.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-16.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-16.jpg",
         description: "Alga desintoxicante. Elimina metales pesados y toxinas."
     },
     {
@@ -245,7 +245,7 @@ const products = [
         name: "Saw Palmetto",
         category: "hierbas",
         price: 24.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-16[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-16[1].jpg",
         description: "Para la salud prostática masculina. Extracto natural."
     },
     {
@@ -253,7 +253,7 @@ const products = [
         name: "Vitamina E 400 UI",
         category: "vitaminas",
         price: 18.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-16[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-16[2].jpg",
         description: "Antioxidante poderoso. Protege células del daño oxidativo."
     },
     {
@@ -261,7 +261,7 @@ const products = [
         name: "Ginkgo Biloba",
         category: "hierbas",
         price: 23.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-16[3].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-16[3].jpg",
         description: "Mejora memoria y circulación cerebral. Concentración mental."
     },
     {
@@ -269,7 +269,7 @@ const products = [
         name: "Resveratrol",
         category: "suplementos",
         price: 38.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-17.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-17.jpg",
         description: "Antioxidante antiedad. Protección cardiovascular y longevidad."
     },
     {
@@ -277,7 +277,7 @@ const products = [
         name: "Semillas de Chía",
         category: "suplementos",
         price: 12.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-17[1].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-17[1].jpg",
         description: "Superalimento rico en Omega 3, fibra y proteína. 500g."
     },
     {
@@ -285,7 +285,7 @@ const products = [
         name: "Aceite de Argán",
         category: "aceites",
         price: 34.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-17[2].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-17[2].jpg",
         description: "Aceite de argán puro marroquí. Para piel y cabello. 100ml."
     },
     {
@@ -293,7 +293,7 @@ const products = [
         name: "Rhodiola Rosea",
         category: "hierbas",
         price: 26.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-17[3].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-17[3].jpg",
         description: "Adaptógeno para energía y resistencia al estrés."
     },
     {
@@ -301,7 +301,7 @@ const products = [
         name: "Whey Protein Isolate",
         category: "proteinas",
         price: 54.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-17[4].jpg",
+        image: "img/PHOTO-2025-06-24-16-44-17[4].jpg",
         description: "Proteína de suero aislada. 90% proteína pura. Sabor vainilla. 1kg."
     },
     {
@@ -309,7 +309,7 @@ const products = [
         name: "NAC (N-Acetil Cisteína)",
         category: "suplementos",
         price: 27.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-16-44-18.jpg",
+        image: "img/PHOTO-2025-06-24-16-44-18.jpg",
         description: "Apoyo hepático y antioxidante. Detox natural."
     },
     {
@@ -317,7 +317,7 @@ const products = [
         name: "Extracto de Arándano",
         category: "hierbas",
         price: 21.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-15-30.jpg",
+        image: "img/PHOTO-2025-06-24-21-15-30.jpg",
         description: "Para la salud urinaria. Rico en antioxidantes."
     },
     {
@@ -325,7 +325,7 @@ const products = [
         name: "Lecitina de Soya",
         category: "suplementos",
         price: 19.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-15-30[1].jpg",
+        image: "img/PHOTO-2025-06-24-21-15-30[1].jpg",
         description: "Salud cerebral y metabolismo de grasas. 1200mg."
     },
     {
@@ -333,7 +333,7 @@ const products = [
         name: "Selenio 200mcg",
         category: "vitaminas",
         price: 14.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-15-32.jpg",
+        image: "img/PHOTO-2025-06-24-21-15-32.jpg",
         description: "Mineral antioxidante. Salud tiroidea e inmunológica."
     },
     {
@@ -341,7 +341,7 @@ const products = [
         name: "Diente de León",
         category: "hierbas",
         price: 16.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-15-33.jpg",
+        image: "img/PHOTO-2025-06-24-21-15-33.jpg",
         description: "Desintoxicante hepático. Diurético natural."
     },
     {
@@ -349,7 +349,7 @@ const products = [
         name: "Aceite de Onagra",
         category: "aceites",
         price: 23.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-15-33[1].jpg",
+        image: "img/PHOTO-2025-06-24-21-15-33[1].jpg",
         description: "Equilibrio hormonal femenino. Rico en GLA."
     },
     {
@@ -357,7 +357,7 @@ const products = [
         name: "Valeriana Complex",
         category: "hierbas",
         price: 18.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-10.jpg",
+        image: "img/PHOTO-2025-06-24-21-16-10.jpg",
         description: "Ayuda natural para dormir. Reduce ansiedad."
     },
     {
@@ -365,7 +365,7 @@ const products = [
         name: "Potasio 99mg",
         category: "vitaminas",
         price: 13.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-11.jpg",
+        image: "img/PHOTO-2025-06-24-21-16-11.jpg",
         description: "Electrolito esencial. Salud cardiovascular y muscular."
     },
     {
@@ -373,7 +373,7 @@ const products = [
         name: "Cardo Mariano",
         category: "hierbas",
         price: 22.50,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-11[1].jpg",
+        image: "img/PHOTO-2025-06-24-21-16-11[1].jpg",
         description: "Protector hepático. Regeneración del hígado."
     },
     {
@@ -381,7 +381,7 @@ const products = [
         name: "Glutamina en Polvo",
         category: "proteinas",
         price: 28.99,
-        image: "C:/Users/jhanl/Downloads/img/PHOTO-2025-06-24-21-16-12.jpg",
+        image: "img/PHOTO-2025-06-24-21-16-12.jpg",
         description: "Recuperación muscular y salud intestinal. 500g."
     }
 ];
