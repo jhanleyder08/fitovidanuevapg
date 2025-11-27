@@ -147,10 +147,16 @@ export default function Header() {
 
       {/* Search Bar Overlay */}
       <div className={cn(
-        "fixed top-0 left-0 right-0 h-32 z-40 bg-white/90 backdrop-blur-xl transition-all duration-500 ease-in-out",
+        "fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm transition-all duration-300",
+        isSearchOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+      )}
+        onClick={() => setIsSearchOpen(false)}
+      />
+      <div className={cn(
+        "fixed top-0 left-0 right-0 z-[70] bg-white shadow-xl transition-all duration-300 ease-out",
         isSearchOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
       )}>
-        <div className="max-w-3xl mx-auto px-4 h-full flex items-end pb-6 justify-center">
+        <div className="max-w-3xl mx-auto px-4 py-6">
           <div className="w-full relative group">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--muted)] group-focus-within:text-[var(--primary)] transition-colors" />
             <input
@@ -158,6 +164,12 @@ export default function Header() {
               placeholder="¿Qué producto natural buscas hoy?"
               value={searchQuery}
               onChange={handleSearch}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchQuery.trim()) {
+                  setIsSearchOpen(false);
+                  document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               autoFocus={isSearchOpen}
               className="w-full pl-14 pr-12 py-4 bg-[var(--background)] border-2 border-transparent focus:border-[var(--primary)]/30 rounded-2xl focus:outline-none shadow-inner text-lg transition-all placeholder:text-gray-400"
             />

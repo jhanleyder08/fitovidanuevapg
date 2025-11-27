@@ -31,16 +31,16 @@ export default function ProductCard({ product }: ProductCardProps) {
     <>
       <div 
         ref={cardRef}
-        className="group bg-white rounded-2xl border border-[var(--border)] hover:border-[var(--primary)]/30 hover:shadow-lg hover:shadow-[var(--primary)]/5 transition-all duration-300 overflow-hidden"
+        className="group bg-white rounded-xl sm:rounded-2xl border border-[var(--border)] hover:border-[var(--primary)]/30 hover:shadow-lg hover:shadow-[var(--primary)]/5 transition-all duration-300 overflow-hidden"
       >
         {/* Image */}
         <div 
-          className="relative aspect-[4/3] overflow-hidden cursor-pointer bg-[var(--background)]"
+          className="relative aspect-square overflow-hidden cursor-pointer bg-[var(--background)]"
           onClick={handleOpenModal}
         >
           {imageError ? (
-            <div className="w-full h-full bg-[var(--accent-light)]/30 flex items-center justify-center">
-              <span className="text-[var(--primary)] text-center px-4 font-medium text-sm">
+            <div className="w-full h-full bg-[var(--accent-light)]/30 flex items-center justify-center p-2">
+              <span className="text-[var(--primary)] text-center font-medium text-xs sm:text-sm">
                 {product.name}
               </span>
             </div>
@@ -51,44 +51,47 @@ export default function ProductCard({ product }: ProductCardProps) {
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
               onError={() => setImageError(true)}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
           )}
           
-          {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-4">
-            <span className="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium text-[var(--foreground)] flex items-center gap-2">
-              <Eye className="h-4 w-4" />
+          {/* Overlay on hover - Hidden on mobile for better touch */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex items-end justify-center pb-3">
+            <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-[var(--foreground)] flex items-center gap-1.5">
+              <Eye className="h-3.5 w-3.5" />
               Ver detalles
             </span>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-4">
-          <span className="inline-block px-2.5 py-1 text-xs font-medium text-[var(--primary)] bg-[var(--primary)]/10 rounded-full mb-2">
+        {/* Content - Compact on mobile */}
+        <div className="p-3 sm:p-4">
+          <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-medium text-[var(--primary)] bg-[var(--primary)]/10 rounded-full mb-1.5 sm:mb-2">
             {getCategoryName(product.category)}
           </span>
           
-          <h3 className="font-semibold text-[var(--foreground)] mb-1.5 line-clamp-1">
+          <h3 className="font-semibold text-sm sm:text-base text-[var(--foreground)] mb-1 line-clamp-1">
             {product.name}
           </h3>
           
-          <p className="text-[var(--muted)] text-sm mb-4 line-clamp-2 leading-relaxed">
-            {truncateText(product.description, 70)}
+          {/* Description hidden on mobile for cleaner look */}
+          <p className="hidden sm:block text-[var(--muted)] text-sm mb-3 line-clamp-2 leading-relaxed">
+            {truncateText(product.description, 60)}
           </p>
 
-          <div className="flex items-center justify-between pt-3 border-t border-[var(--border)]">
-            <span className="text-lg font-bold text-[var(--primary)]">
+          {/* Price and button - Stack on very small screens */}
+          <div className="flex items-center justify-between pt-2 sm:pt-3 border-t border-[var(--border)] gap-2">
+            <span className="text-base sm:text-lg font-bold text-[var(--primary)]">
               {formatPrice(product.price)}
             </span>
             
             <button
               onClick={handleAddToCart}
-              className="flex items-center gap-1.5 px-3 py-2 bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white text-sm font-medium rounded-full transition-all duration-200"
+              className="flex items-center justify-center p-2 sm:px-3 sm:py-2 bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white text-sm font-medium rounded-full transition-all duration-200"
+              aria-label="Agregar al carrito"
             >
               <ShoppingCart className="h-4 w-4" />
-              <span className="hidden sm:inline">Agregar</span>
+              <span className="hidden md:inline ml-1.5">Agregar</span>
             </button>
           </div>
         </div>
