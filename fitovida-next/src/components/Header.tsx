@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Leaf, Search, ShoppingCart, ShieldCheck, Menu, X, Sprout } from 'lucide-react';
+import { Leaf, Search, ShoppingCart, ShieldCheck, Menu, X } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 
@@ -48,60 +48,34 @@ export default function Header() {
             className={cn(
               "relative flex items-center justify-between px-4 md:px-6 transition-all duration-500 rounded-2xl",
               isScrolled 
-                ? "h-16 bg-white/80 backdrop-blur-md shadow-lg shadow-[var(--primary)]/5" 
-                : "h-20 bg-transparent"
+                ? "h-14 bg-white/95 backdrop-blur-md shadow-lg shadow-black/5" 
+                : "h-16 bg-transparent"
             )}
           >
-            {/* Decorative Leaves (Visible on scroll or hover) */}
-            <div className={cn(
-              "absolute -top-2 -left-2 text-[var(--primary)] transition-opacity duration-500 animate-sway",
-              isScrolled ? "opacity-100" : "opacity-0"
-            )}>
-              <Leaf className="h-6 w-6 fill-current opacity-40" />
-            </div>
-            <div className={cn(
-              "absolute -bottom-2 -right-2 text-[var(--celadon)] transition-opacity duration-500 animate-float animation-delay-400",
-              isScrolled ? "opacity-100" : "opacity-0"
-            )}>
-              <Sprout className="h-5 w-5 fill-current opacity-40" />
-            </div>
-
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group relative z-10">
               <div className={cn(
-                "p-2.5 rounded-2xl transition-all duration-300 group-hover:rotate-12",
+                "p-2 rounded-xl transition-all duration-300",
                 isScrolled 
-                  ? "bg-[var(--primary)] text-white shadow-md shadow-[var(--primary)]/30" 
-                  : "bg-white/90 backdrop-blur-sm text-[var(--primary)] shadow-sm"
+                  ? "bg-[var(--primary)] text-white" 
+                  : "bg-[var(--primary)] text-white"
               )}>
-                <Leaf className="h-6 w-6" />
+                <Leaf className="h-5 w-5" />
               </div>
-              <span className={cn(
-                "text-xl font-bold tracking-tight transition-colors duration-300",
-                isScrolled ? "text-[var(--foreground)]" : "text-[var(--foreground)] md:text-[var(--foreground)]"
-              )}>
+              <span className="text-xl font-bold tracking-tight text-[var(--foreground)]">
                 Fitovida
               </span>
             </Link>
 
             {/* Navigation Desktop */}
-            <nav className={cn(
-              "hidden md:flex items-center gap-1 p-1.5 rounded-2xl transition-all duration-500",
-              !isScrolled && "bg-white/50 backdrop-blur-sm"
-            )}>
-              {['inicio', 'productos', 'categorias', 'sobre-nosotros', 'contacto'].map((item) => (
+            <nav className="hidden md:flex items-center gap-1">
+              {['inicio', 'productos', 'sobre-nosotros'].map((item) => (
                 <button 
                   key={item}
-                  onClick={() => scrollToSection(item === 'categorias' ? 'categorias' : item)}
-                  className={cn(
-                    "px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300 relative overflow-hidden group",
-                    "text-[var(--muted)] hover:text-[var(--primary)]"
-                  )}
+                  onClick={() => scrollToSection(item)}
+                  className="px-4 py-2 text-sm font-medium text-[var(--muted)] hover:text-[var(--primary)] rounded-lg hover:bg-[var(--accent-light)]/20 transition-all duration-200"
                 >
-                  <span className="relative z-10">
-                    {item === 'sobre-nosotros' ? 'Nosotros' : item.charAt(0).toUpperCase() + item.slice(1)}
-                  </span>
-                  <span className="absolute inset-0 bg-[var(--accent-light)]/30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-xl" />
+                  {item === 'sobre-nosotros' ? 'Nosotros' : item.charAt(0).toUpperCase() + item.slice(1)}
                 </button>
               ))}
             </nav>
@@ -158,13 +132,12 @@ export default function Header() {
           isMenuOpen ? "max-h-96 opacity-100 scale-y-100" : "max-h-0 opacity-0 scale-y-95"
         )}>
           <nav className="flex flex-col p-2 gap-1">
-            {['Inicio', 'Productos', 'Categorías', 'Nosotros', 'Contacto'].map((item) => (
+            {['Inicio', 'Productos', 'Nosotros'].map((item) => (
               <button 
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase() === 'nosotros' ? 'sobre-nosotros' : item.toLowerCase())}
-                className="text-left py-3 px-4 text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--accent-light)]/30 rounded-xl transition-all duration-200 font-medium flex items-center gap-3"
+                className="text-left py-3 px-4 text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--accent-light)]/30 rounded-xl transition-all duration-200 font-medium"
               >
-                <Sprout className="h-4 w-4 opacity-50" />
                 {item}
               </button>
             ))}
