@@ -1,16 +1,65 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, memo } from 'react';
 import Image from 'next/image';
-import { X, User, CreditCard, ShoppingBag, Lock, Check } from 'lucide-react';
+import { X, User, CreditCard, ShoppingBag, Lock, Check, AlertCircle } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
 import { formatPrice, cn } from '@/lib/utils';
 import { CustomerInfo, PaymentMethod } from '@/types';
+import gsap from 'gsap';
+
+// Error message component with GSAP animation
+const ErrorMessage = memo(({ message }: { message?: string }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const isVisible = useRef(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const content = contentRef.current;
+    if (!container || !content) return;
+
+    gsap.killTweensOf([container, content]);
+
+    if (message && !isVisible.current) {
+      isVisible.current = true;
+      gsap.set(container, { height: 0, opacity: 0, overflow: 'hidden' });
+      gsap.set(content, { y: -8, opacity: 0 });
+      gsap.to(container, { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' });
+      gsap.to(content, { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out', delay: 0.05 });
+    } 
+    else if (!message && isVisible.current) {
+      isVisible.current = false;
+      gsap.to(content, { y: -8, opacity: 0, duration: 0.15, ease: 'power2.in' });
+      gsap.to(container, { height: 0, opacity: 0, duration: 0.2, ease: 'power2.in', delay: 0.05 });
+    }
+  }, [message]);
+
+  return (
+    <div ref={containerRef} style={{ height: 0, opacity: 0, overflow: 'hidden' }}>
+      <div ref={contentRef} className="flex items-center gap-1.5 text-red-500 text-xs pt-1" style={{ opacity: 0, transform: 'translateY(-8px)' }}>
+        <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
+        <span>{message || ''}</span>
+      </div>
+    </div>
+  );
+});
+ErrorMessage.displayName = 'ErrorMessage';
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  zip?: string;
+}
 
 export default function CheckoutModal() {
   const {
     cart,
     isCheckoutOpen,
+    checkoutOrigin,
     closeCheckout,
     shippingCost,
     discountCode,
@@ -36,21 +85,165 @@ export default function CheckoutModal() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
+  
+  const modalRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const successModalRef = useRef<HTMLDivElement>(null);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
-    if (isCheckoutOpen) {
+    if (isCheckoutOpen && !isClosing) {
       document.body.style.overflow = 'hidden';
-    } else {
+      
+      // GSAP animation for modal entrance
+      if (overlayRef.current) {
+        gsap.fromTo(overlayRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.3, ease: 'power2.out' }
+        );
+      }
+      if (modalRef.current) {
+        // Calculate starting position relative to viewport center
+        const viewportCenterX = window.innerWidth / 2;
+        const viewportCenterY = window.innerHeight / 2;
+        
+        let startX = 0;
+        let startY = 0;
+        
+        if (checkoutOrigin) {
+          startX = checkoutOrigin.x - viewportCenterX;
+          startY = checkoutOrigin.y - viewportCenterY;
+        }
+        
+        gsap.fromTo(modalRef.current,
+          { 
+            scale: 0.3, 
+            opacity: 0, 
+            x: startX,
+            y: startY
+          },
+          { 
+            scale: 1, 
+            opacity: 1, 
+            x: 0,
+            y: 0, 
+            duration: 0.5, 
+            ease: 'back.out(1.7)' // Bounce effect
+          }
+        );
+      }
+    } else if (!isCheckoutOpen) {
       document.body.style.overflow = 'auto';
     }
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isCheckoutOpen]);
+  }, [isCheckoutOpen, isClosing, checkoutOrigin]);
+
+  // Handle close with animation
+  const handleClose = () => {
+    if (modalRef.current && overlayRef.current) {
+      setIsClosing(true);
+      
+      gsap.to(modalRef.current, {
+        scale: 0.8,
+        opacity: 0,
+        y: 30,
+        duration: 0.3,
+        ease: 'power2.in'
+      });
+      
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          setIsClosing(false);
+          closeCheckout();
+        }
+      });
+    } else {
+      closeCheckout();
+    }
+  };
+
+  // Animate success modal
+  useEffect(() => {
+    if (showSuccess && successModalRef.current) {
+      gsap.fromTo(successModalRef.current,
+        { scale: 0.8, opacity: 0, y: 20 },
+        { 
+          scale: 1, 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.5, 
+          ease: 'back.out(1.7)'
+        }
+      );
+    }
+  }, [showSuccess]);
+
+  // Validation functions
+  const validateField = (name: string, value: string): string | undefined => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'El nombre es obligatorio';
+        if (value.trim().length < 3) return 'Mínimo 3 caracteres';
+        return undefined;
+      case 'email':
+        if (!value) return 'El correo es obligatorio';
+        if (!value.includes('@')) return 'Incluye un @ en el correo';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Formato de correo inválido';
+        return undefined;
+      case 'phone':
+        if (!value) return 'El teléfono es obligatorio';
+        if (!/^\d{7,}$/.test(value.replace(/\s/g, ''))) return 'Ingresa un número válido';
+        return undefined;
+      case 'address':
+        if (!value.trim()) return 'La dirección es obligatoria';
+        return undefined;
+      case 'city':
+        if (!value.trim()) return 'La ciudad es obligatoria';
+        return undefined;
+      case 'zip':
+        if (!value.trim()) return 'El código postal es obligatorio';
+        return undefined;
+      default:
+        return undefined;
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    const currentError = errors[name as keyof FormErrors];
+    
+    if (error !== currentError) {
+      setErrors(prev => ({ ...prev, [name]: error }));
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, formData[key as keyof CustomerInfo]);
+      if (error) newErrors[key as keyof FormErrors] = error;
+    });
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleApplyPromo = () => {
@@ -65,12 +258,15 @@ export default function CheckoutModal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!validateForm()) return;
+    
     const order = createOrder(formData, paymentMethod, notes);
     setOrderNumber(order.orderNumber);
     setShowSuccess(true);
     
     // Reset form
     setFormData({ name: '', email: '', phone: '', address: '', city: '', zip: '' });
+    setErrors({});
     setNotes('');
     setPromoInput('');
     resetDiscount();
@@ -94,9 +290,9 @@ export default function CheckoutModal() {
   // Success Modal
   if (showSuccess) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
         <div className="absolute inset-0 bg-[var(--foreground)]/40 backdrop-blur-sm" />
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center animate-in fade-in zoom-in-95 duration-300 border border-[var(--border)]">
+        <div ref={successModalRef} className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center border border-[var(--border)]">
           <div className="w-16 h-16 bg-[var(--accent-light)]/50 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <Check className="h-10 w-10 text-[var(--primary)]" />
           </div>
@@ -122,15 +318,15 @@ export default function CheckoutModal() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-[var(--foreground)]/40 backdrop-blur-sm" onClick={closeCheckout} />
+    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
+      <div ref={overlayRef} className="absolute inset-0 bg-[var(--foreground)]/40 backdrop-blur-sm" onClick={handleClose} />
       
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+      <div ref={modalRef} className="relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between p-4 md:p-6 border-b">
-          <h2 className="text-xl md:text-2xl font-bold text-[var(--foreground)]">Finalizar Compra</h2>
+          <h2 className="text-xl md:text-2xl font-bold text-[var(--foreground)]">Finalizar compra</h2>
           <button
-            onClick={closeCheckout}
+            onClick={handleClose}
             className="p-2 hover:bg-[var(--background)] rounded-full transition-colors"
           >
             <X className="h-5 w-5 text-[var(--muted)]" />
@@ -141,26 +337,32 @@ export default function CheckoutModal() {
         <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
           <div className="grid md:grid-cols-2 gap-6 p-4 md:p-6">
             {/* Form Section */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               {/* Personal Info */}
               <div>
                 <h3 className="flex items-center gap-2 text-lg font-semibold text-[var(--foreground)] mb-4">
                   <User className="h-5 w-5 text-[var(--primary)]" />
-                  Información Personal
+                  Información personal
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
-                      Nombre Completo *
+                      Nombre completo *
                     </label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20"
+                      onBlur={handleBlur}
+                      className={cn(
+                        "w-full px-4 py-2 border rounded-lg focus:outline-none transition-colors",
+                        errors.name 
+                          ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100" 
+                          : "border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                      )}
                     />
+                    <ErrorMessage message={errors.name} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
@@ -171,9 +373,15 @@ export default function CheckoutModal() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20"
+                      onBlur={handleBlur}
+                      className={cn(
+                        "w-full px-4 py-2 border rounded-lg focus:outline-none transition-colors",
+                        errors.email 
+                          ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100" 
+                          : "border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                      )}
                     />
+                    <ErrorMessage message={errors.email} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
@@ -184,9 +392,15 @@ export default function CheckoutModal() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20"
+                      onBlur={handleBlur}
+                      className={cn(
+                        "w-full px-4 py-2 border rounded-lg focus:outline-none transition-colors",
+                        errors.phone 
+                          ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100" 
+                          : "border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                      )}
                     />
+                    <ErrorMessage message={errors.phone} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
@@ -197,9 +411,15 @@ export default function CheckoutModal() {
                       name="address"
                       value={formData.address}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20"
+                      onBlur={handleBlur}
+                      className={cn(
+                        "w-full px-4 py-2 border rounded-lg focus:outline-none transition-colors",
+                        errors.address 
+                          ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100" 
+                          : "border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                      )}
                     />
+                    <ErrorMessage message={errors.address} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
@@ -210,22 +430,34 @@ export default function CheckoutModal() {
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20"
+                      onBlur={handleBlur}
+                      className={cn(
+                        "w-full px-4 py-2 border rounded-lg focus:outline-none transition-colors",
+                        errors.city 
+                          ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100" 
+                          : "border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                      )}
                     />
+                    <ErrorMessage message={errors.city} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-[var(--foreground)] mb-1">
-                      Código Postal *
+                      Código postal *
                     </label>
                     <input
                       type="text"
                       name="zip"
                       value={formData.zip}
                       onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-2 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20"
+                      onBlur={handleBlur}
+                      className={cn(
+                        "w-full px-4 py-2 border rounded-lg focus:outline-none transition-colors",
+                        errors.zip 
+                          ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-100" 
+                          : "border-[var(--border)] focus:ring-2 focus:ring-[var(--primary)]/20"
+                      )}
                     />
+                    <ErrorMessage message={errors.zip} />
                   </div>
                 </div>
               </div>
@@ -234,7 +466,7 @@ export default function CheckoutModal() {
               <div>
                 <h3 className="flex items-center gap-2 text-lg font-semibold text-[var(--foreground)] mb-4">
                   <CreditCard className="h-5 w-5 text-[var(--primary)]" />
-                  Método de Pago
+                  Método de pago
                 </h3>
                 <div className="space-y-2">
                   {[

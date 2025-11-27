@@ -12,6 +12,7 @@ interface CartStore {
   
   // Checkout state
   isCheckoutOpen: boolean;
+  checkoutOrigin: { x: number; y: number } | null;
   discountCode: string;
   discountAmount: number;
   shippingCost: number;
@@ -32,7 +33,7 @@ interface CartStore {
   toggleCart: () => void;
   
   // Checkout actions
-  openCheckout: () => void;
+  openCheckout: (origin?: { x: number; y: number }) => void;
   closeCheckout: () => void;
   applyPromoCode: (code: string) => boolean;
   resetDiscount: () => void;
@@ -59,9 +60,10 @@ export const useCartStore = create<CartStore>()(
       cart: [],
       isCartOpen: false,
       isCheckoutOpen: false,
+      checkoutOrigin: null,
       discountCode: '',
       discountAmount: 0,
-      shippingCost: 5.00,
+      shippingCost: 15000, // COP
       currentCategory: 'todos',
       searchQuery: '',
       sortBy: 'default',
@@ -116,9 +118,13 @@ export const useCartStore = create<CartStore>()(
       toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
       
       // Checkout actions
-      openCheckout: () => set({ isCheckoutOpen: true, isCartOpen: false }),
+      openCheckout: (origin) => set({ 
+        isCheckoutOpen: true, 
+        isCartOpen: false,
+        checkoutOrigin: origin || null
+      }),
       
-      closeCheckout: () => set({ isCheckoutOpen: false }),
+      closeCheckout: () => set({ isCheckoutOpen: false, checkoutOrigin: null }),
       
       applyPromoCode: (code) => {
         const upperCode = code.toUpperCase();

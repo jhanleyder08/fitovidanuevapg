@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Leaf, Search, ShoppingCart, ShieldCheck, Menu, X } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Leaf, Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 
@@ -13,6 +14,8 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const { toggleCart, getCartCount, setSearchQuery, searchQuery } = useCartStore();
   const cartCount = getCartCount();
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -28,11 +31,18 @@ export default function Header() {
   };
 
   const scrollToSection = (id: string) => {
+    setIsMenuOpen(false);
+    
+    // Si no estamos en la página principal, navegar primero
+    if (pathname !== '/') {
+      router.push(`/#${id}`);
+      return;
+    }
+    
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    setIsMenuOpen(false);
   };
 
   return (
@@ -109,9 +119,9 @@ export default function Header() {
               <Link
                 href="/login"
                 className="p-2.5 text-[var(--muted)] hover:text-[var(--primary)] hover:bg-[var(--accent-light)]/30 rounded-xl transition-all duration-200 group"
-                aria-label="Admin"
+                aria-label="Iniciar sesión"
               >
-                <ShieldCheck className="h-5 w-5 transition-transform group-hover:scale-110" />
+                <User className="h-5 w-5 transition-transform group-hover:scale-110" />
               </Link>
 
               {/* Mobile menu button */}
@@ -141,6 +151,15 @@ export default function Header() {
                 {item}
               </button>
             ))}
+            <div className="border-t border-[var(--border)] my-2" />
+            <Link 
+              href="/login"
+              onClick={() => setIsMenuOpen(false)}
+              className="flex items-center gap-3 py-3 px-4 text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[var(--accent-light)]/30 rounded-xl transition-all duration-200 font-medium"
+            >
+              <User className="h-5 w-5" />
+              Iniciar sesión
+            </Link>
           </nav>
         </div>
       </header>

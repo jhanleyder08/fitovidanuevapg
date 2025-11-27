@@ -58,7 +58,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           {/* Overlay on hover - Hidden on mobile for better touch */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex items-end justify-center pb-3">
             <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-[var(--foreground)] flex items-center gap-1.5">
-              <Eye className="h-3.5 w-3.5" />
+              <Eye className="h-4 w-4" />
               Ver detalles
             </span>
           </div>

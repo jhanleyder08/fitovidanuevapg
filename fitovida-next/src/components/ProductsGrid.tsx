@@ -52,7 +52,7 @@ export default function ProductsGrid() {
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-10">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--foreground)]">
-            Nuestros Productos
+            Nuestros productos
           </h2>
           <p className="text-sm sm:text-base text-[var(--muted)] mt-2 md:mt-3 max-w-lg mx-auto">
             Explora nuestra selección de productos naturales de alta calidad

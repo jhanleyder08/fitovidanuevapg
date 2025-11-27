@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { X, Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
@@ -18,6 +18,7 @@ export default function CartSidebar() {
   } = useCartStore();
   
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+  const checkoutButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (isCartOpen) {
@@ -35,17 +36,22 @@ export default function CartSidebar() {
   };
 
   const handleCheckout = () => {
-    if (cart.length > 0) {
-      openCheckout();
+    if (cart.length > 0 && checkoutButtonRef.current) {
+      const rect = checkoutButtonRef.current.getBoundingClientRect();
+      const origin = {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      };
+      openCheckout(origin);
     }
   };
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay - z-[60] to cover navbar which is z-50 */}
       <div
         className={cn(
-          "fixed inset-0 bg-[var(--foreground)]/30 backdrop-blur-sm z-40 transition-opacity duration-300",
+          "fixed inset-0 bg-[var(--foreground)]/30 backdrop-blur-sm z-[60] transition-opacity duration-300",
           isCartOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
         onClick={toggleCart}
@@ -54,7 +60,7 @@ export default function CartSidebar() {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white shadow-2xl z-50 transition-transform duration-300 flex flex-col border-l border-[var(--border)]",
+          "fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white shadow-2xl z-[70] transition-transform duration-300 flex flex-col border-l border-[var(--border)]",
           isCartOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -151,6 +157,7 @@ export default function CartSidebar() {
               <span className="text-xl font-bold text-[var(--primary)]">{formatPrice(getCartTotal())}</span>
             </div>
             <button
+              ref={checkoutButtonRef}
               onClick={handleCheckout}
               className="w-full py-3.5 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-medium rounded-xl transition-all duration-200"
             >

@@ -242,7 +242,7 @@ export default function ProductModal({ product, isOpen, onClose, triggerRef }: P
               ) : (
                 <>
                   <ShoppingCart className="h-5 w-5" />
-                  Agregar al Carrito
+                  Agregar al carrito
                 </>
               )}
             </button>

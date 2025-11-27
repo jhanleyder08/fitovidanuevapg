@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatPrice(price: number): string {
-  return `$${price.toFixed(2)}`;
+  return `$${price.toLocaleString('es-CO', { maximumFractionDigits: 0 })}`;
 }
 
 export function truncateText(text: string, maxLength: number): string {

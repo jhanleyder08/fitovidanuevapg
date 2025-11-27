@@ -28,8 +28,8 @@ export default function Hero() {
 
           {/* Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[var(--foreground)] leading-[1.1]">
-            Tu Bienestar,{' '}
-            <span className="text-[var(--primary)]">Nuestra Pasión</span>
+            Tu bienestar,{' '}
+            <span className="text-[var(--primary)]">nuestra pasión</span>
           </h1>
           
           <p className="text-lg md:text-xl text-[var(--muted)] max-w-2xl mx-auto leading-relaxed">
@@ -42,7 +42,7 @@ export default function Hero() {
               onClick={scrollToProducts}
               className="inline-flex items-center gap-2 bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white font-medium px-8 py-4 rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-[var(--primary)]/25"
             >
-              Ver Productos
+              Ver productos
               <ArrowRight className="w-5 h-5" />
             </button>
             
@@ -58,15 +58,15 @@ export default function Hero() {
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 text-sm">
             <div className="flex items-center gap-2 text-[var(--muted)]">
               <ShieldCheck className="w-5 h-5 text-[var(--primary)]" />
-              <span>Calidad Certificada</span>
+              <span>Calidad certificada</span>
             </div>
             <div className="flex items-center gap-2 text-[var(--muted)]">
               <Truck className="w-5 h-5 text-[var(--primary)]" />
-              <span>Envío Rápido</span>
+              <span>Envío rápido</span>
             </div>
             <div className="flex items-center gap-2 text-[var(--muted)]">
               <Sparkles className="w-5 h-5 text-[var(--primary)]" />
-              <span>+2000 Clientes Felices</span>
+              <span>+2000 clientes felices</span>
             </div>
           </div>
         </div>

@@ -5,22 +5,22 @@ import { Leaf, ShieldCheck, Truck, HeartHandshake } from 'lucide-react';
 const benefits = [
   {
     icon: Leaf,
-    title: '100% Natural',
+    title: '100% natural',
     description: 'Productos orgánicos certificados'
   },
   {
     icon: ShieldCheck,
-    title: 'Calidad Garantizada',
+    title: 'Calidad garantizada',
     description: 'Proveedores certificados'
   },
   {
     icon: Truck,
-    title: 'Envío Rápido',
+    title: 'Envío rápido',
     description: 'Entrega en 24-48 horas'
   },
   {
     icon: HeartHandshake,
-    title: 'Asesoría Experta',
+    title: 'Asesoría experta',
     description: 'Te ayudamos a elegir'
   },
 ];
@@ -48,7 +48,7 @@ export default function AboutSection() {
         {/* Simple About Text */}
         <div className="mt-10 sm:mt-14 md:mt-16 pt-8 sm:pt-10 md:pt-12 border-t border-[var(--border)] text-center max-w-2xl mx-auto">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--foreground)] mb-3 sm:mb-4">
-            Tu Tienda Naturista de Confianza
+            Tu tienda naturista de confianza
           </h2>
           <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed">
             En Fitovida seleccionamos cuidadosamente cada producto para ofrecerte lo mejor de la naturaleza. 
