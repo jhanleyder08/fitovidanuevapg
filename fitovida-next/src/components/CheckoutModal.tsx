@@ -118,18 +118,16 @@ export default function CheckoutModal() {
         
         gsap.fromTo(modalRef.current,
           { 
-            scale: 0.3, 
+            scale: 0.9, 
             opacity: 0, 
-            x: startX,
-            y: startY
+            y: 20
           },
           { 
             scale: 1, 
             opacity: 1, 
-            x: 0,
             y: 0, 
-            duration: 0.5, 
-            ease: 'back.out(1.7)' // Bounce effect
+            duration: 0.35, 
+            ease: 'power2.out'
           }
         );
       }
@@ -172,13 +170,13 @@ export default function CheckoutModal() {
   useEffect(() => {
     if (showSuccess && successModalRef.current) {
       gsap.fromTo(successModalRef.current,
-        { scale: 0.8, opacity: 0, y: 20 },
+        { scale: 0.95, opacity: 0, y: 10 },
         { 
           scale: 1, 
           opacity: 1, 
           y: 0, 
-          duration: 0.5, 
-          ease: 'back.out(1.7)'
+          duration: 0.3, 
+          ease: 'power2.out'
         }
       );
     }
