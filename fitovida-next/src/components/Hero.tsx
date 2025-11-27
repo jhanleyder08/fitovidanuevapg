@@ -94,24 +94,30 @@ export default function Hero() {
               {/* Product floating container */}
               <div className="relative h-full flex flex-col items-center justify-center group cursor-pointer" onClick={scrollToProducts}>
                 {/* Product Image - Main focus */}
-                <div className="relative w-[280px] h-[280px] mb-6">
-                  <div className="absolute inset-0 bg-white/40 rounded-full blur-2xl scale-125" />
+                <div className="relative w-[260px] h-[260px] mb-8">
+                  <div className="absolute inset-0 bg-white/50 rounded-full blur-2xl scale-125" />
                   <Image
                     src={featuredProduct.image}
                     alt={featuredProduct.name}
-                    width={280}
-                    height={280}
+                    width={260}
+                    height={260}
                     className="relative object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
                 
-                {/* Product Info - Fade into background */}
-                <div className="text-center space-y-2 px-8">
-                  <span className="inline-block px-3 py-1 bg-white/60 backdrop-blur-sm rounded-full text-xs font-medium text-[var(--primary)] uppercase tracking-wider">
+                {/* Product Info - Clear but integrated */}
+                <div className="text-center space-y-3 px-6">
+                  <span className="inline-block px-3 py-1.5 bg-white/70 backdrop-blur-sm rounded-full text-xs font-semibold text-[var(--primary)] uppercase tracking-wider border border-white/50">
                     {featuredProduct.category}
                   </span>
-                  <h3 className="text-xl font-bold text-[var(--foreground)]">{featuredProduct.name}</h3>
-                  <p className="text-2xl font-bold text-[var(--primary)]">${featuredProduct.price}</p>
+                  <h3 className="text-2xl font-bold text-[var(--foreground)] leading-tight">{featuredProduct.name}</h3>
+                  <p className="text-sm text-[var(--muted)] max-w-[280px] line-clamp-2">{featuredProduct.description}</p>
+                  <p className="text-3xl font-bold text-[var(--primary)]">${featuredProduct.price}</p>
+                  
+                  <button className="mt-4 inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)]/90 hover:bg-[var(--primary)] text-white font-medium rounded-full backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-[var(--primary)]/25">
+                    Ver Producto
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
               
