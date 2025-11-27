@@ -118,16 +118,18 @@ export default function CheckoutModal() {
         
         gsap.fromTo(modalRef.current,
           { 
-            scale: 0.9, 
+            scale: 0.4, 
             opacity: 0, 
-            y: 20
+            x: startX,
+            y: startY
           },
           { 
             scale: 1, 
             opacity: 1, 
+            x: 0,
             y: 0, 
-            duration: 0.35, 
-            ease: 'power2.out'
+            duration: 0.4, 
+            ease: 'power3.out'
           }
         );
       }
