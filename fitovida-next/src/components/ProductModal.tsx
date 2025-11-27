@@ -12,7 +12,7 @@ interface ProductModalProps {
   product: Product;
   isOpen: boolean;
   onClose: () => void;
-  triggerRef?: RefObject<HTMLDivElement>;
+  triggerRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export default function ProductModal({ product, isOpen, onClose, triggerRef }: ProductModalProps) {
